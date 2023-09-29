@@ -1,26 +1,26 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.fvgprinc.app.jpaprueba.logica;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author garfi
  */
 @Entity
-public class Alumno implements Serializable {
+public class Materia implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-//    @Column(name="ID", columnDefinition = "INT")
     private int id;
 
     /**
@@ -62,67 +62,31 @@ public class Alumno implements Serializable {
         this.nombre = nombre;
     }
 
-    @Column(columnDefinition = "varchar(100)")
-    private String apellido;
+    /**
+     * Esto es si la materia es semestral, anual, etc.
+     */
+    private String tipo;
 
     /**
-     * Get the value of apellido
+     * Get the value of tipo
      *
-     * @return the value of apellido
+     * @return the value of tipo
      */
-    public String getApellido() {
-        return apellido;
-    }
-
-    /**
-     * Set the value of apellido
-     *
-     * @param apellido new value of apellido
-     */
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    @Temporal(TemporalType.DATE)
-    private Date fechaNac;
-
-    /**
-     * Get the value of fechaNac
-     *
-     * @return the value of fechaNac
-     */
-    public Date getFechaNac() {
-        return fechaNac;
+    public String getTipo() {
+        return tipo;
     }
 
     /**
-     * Set the value of fechaNac
+     * Set the value of tipo
      *
-     * @param fechaNac new value of fechaNac
+     * @param tipo new value of tipo
      */
-    public void setFechaNac(Date fechaNac) {
-        this.fechaNac = fechaNac;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public Alumno() {
-    }
-
-    public Alumno(int id, String nombre, String apellido, Date fechaNac, Carrera carrera) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.fechaNac = fechaNac;
-        this.carrera = carrera;
-    }
-
-
-
-    @Override
-    public String toString() {
-        return "Alumno{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", fechaNac=" + fechaNac + '}';
-    }
-
-    @OneToOne
+    
+    @ManyToOne
     private Carrera carrera;
 
     /**
@@ -142,5 +106,17 @@ public class Alumno implements Serializable {
     public void setCarrera(Carrera carrera) {
         this.carrera = carrera;
     }
+
+    public Materia() {
+    }
+
+    public Materia(int id, String nombre, String tipo, Carrera carrera) {
+        this.id = id;
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.carrera = carrera;
+    }
+
+
 
 }
